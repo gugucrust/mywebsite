@@ -1,0 +1,716 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no" />
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet" />
+<meta name="googlebot" content="noindex, nofollow, noarchive, nosnippet" />
+<meta name="theme-color" content="#fffaf0" />
+<title>가온이의 포켓몬 트레이너 훈련일지</title>
+<style>
+:root{--bg:#07111f;--panel:#0d1b2f;--panel2:#12243c;--line:#263c59;--text:#f7f9fc;--muted:#9fb0c5;--yellow:#ffd54a;--cyan:#5ee0ff;--green:#64d98b;--red:#ff6b67;--shadow:0 12px 28px rgba(0,0,0,.24)}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent} html,body{height:100%;margin:0;overflow:hidden;font-family:-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Pretendard","Noto Sans KR",sans-serif;background:radial-gradient(circle at 85% 0,#17365e 0,#07111f 48%,#040911 100%);color:var(--text)}
+button,input,select{font:inherit} button{cursor:pointer}.app{height:100dvh;max-width:1366px;margin:auto;padding:10px;display:grid;grid-template-rows:76px 48px 1fr;gap:8px}
+/* header */
+.topbar{display:grid;grid-template-columns:minmax(360px,1fr) auto auto;align-items:center;gap:12px;padding:10px 14px;border-radius:22px;background:rgba(13,27,47,.93);border:1px solid var(--line);box-shadow:var(--shadow);backdrop-filter:blur(18px)}
+.brand{display:flex;align-items:center;gap:12px;min-width:0}.logo{width:46px;height:46px;border-radius:50%;flex:0 0 auto;background:linear-gradient(#ef5350 0 45%,#111 45% 55%,#fff 55%);border:3px solid #101722;position:relative;box-shadow:0 0 0 3px rgba(255,213,74,.15)}.logo:after{content:"";position:absolute;left:50%;top:50%;width:14px;height:14px;border-radius:50%;background:#fff;border:4px solid #111;transform:translate(-getCaptureGoal()%,-getCaptureGoal()%)}
+.brand h1{font-size:21px;margin:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.brand small{display:block;color:var(--muted);font-size:11px;margin-top:2px}.total-balls{height:52px;min-width:160px;padding:7px 13px;border-radius:17px;background:linear-gradient(135deg,#182d49,#102139);border:1px solid #315071;display:flex;align-items:center;gap:10px}.ball-big{width:34px;height:34px;border-radius:50%;background:linear-gradient(#ef5350 0 45%,#121212 45% 56%,#fff 56%);border:2px solid #0b111a;position:relative;flex:0 0 auto}.ball-big:after,.pokeball:after{content:"";position:absolute;left:50%;top:50%;border-radius:50%;background:#fff;border:2px solid #111;transform:translate(-getCaptureGoal()%,-getCaptureGoal()%)}.ball-big:after{width:9px;height:9px}.total-balls b{font-size:22px;line-height:1}.total-balls span{display:block;font-size:9px;color:var(--muted);margin-top:3px}.head-actions{display:flex;gap:7px}.iconbtn,.primary{border:1px solid #35506f;color:#fff;background:#182d49;border-radius:13px;padding:10px 12px;font-weight:700}.primary{background:linear-gradient(135deg,#ffd54a,#ffb52f);color:#172033;border:0}
+/* tabs */
+.tabs{display:grid;grid-template-columns:repeat(5,1fr);gap:6px;padding:4px;background:rgba(13,27,47,.88);border:1px solid var(--line);border-radius:16px}.tab{border:0;border-radius:11px;background:transparent;color:#aebdd0;font-weight:800;font-size:12px}.tab.active{background:#1e3b5c;color:#fff;box-shadow:inset 0 0 0 1px #3c6d99}.tab .ti{margin-right:5px}
+/* stage */
+.stage{min-height:0}.view{display:none;height:100%;min-height:0}.view.active{display:block}.panel{height:100%;background:rgba(13,27,47,.93);border:1px solid var(--line);border-radius:22px;box-shadow:var(--shadow);overflow:hidden}.panel-head{height:54px;display:flex;align-items:center;justify-content:space-between;padding:10px 14px;border-bottom:1px solid rgba(43,65,91,.8)}.panel-head h2{font-size:16px;margin:0}.muted{color:var(--muted);font-size:11px}
+/* quests */
+.quest-layout{height:100%;display:grid;grid-template-rows:54px 1fr}.date-nav{display:flex;align-items:center;gap:7px}.navbtn{border:0;background:#1a304d;color:#fff;border-radius:10px;padding:7px 10px}.datebox{min-width:178px;text-align:center;padding:5px 10px;border-radius:11px;background:#10223a;border:1px solid #2d4c6c}.datebox b{display:block;font-size:13px}.datebox span{font-size:9px;color:var(--muted)}
+.quest-grid{padding:9px;display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(2,minmax(0,1fr));gap:8px;min-height:0}.quest-card{min-height:0;border:1px solid #27415e;border-radius:16px;background:linear-gradient(145deg,#10233b,#0d1c30);padding:9px;display:flex;flex-direction:column}.qcard-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:6px}.qcard-title{font-size:12px;font-weight:900}.qcount{font-size:9px;color:#9fdcf6;background:#183552;padding:3px 7px;border-radius:99px}.qitems{display:grid;gap:5px;align-content:start}.quest{min-height:36px;display:grid;grid-template-columns:28px 1fr auto;gap:7px;align-items:center;padding:5px 7px;border-radius:11px;background:#122945;border:1px solid #213e5e}.quest.done{background:#173a31;border-color:#2f7958}.quest.future{opacity:.55}.check{width:26px;height:26px;border-radius:8px;border:2px solid #4b6787;background:#0c1828;color:white;font-size:15px;font-weight:900;display:grid;place-items:center}.done .check{background:#2ea043;border-color:#62d17d}.qname{font-size:11px;font-weight:800;line-height:1.1}.qdetail{font-size:8px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%}.optional{font-size:7px;border-radius:99px;padding:2px 4px;background:#3a3150;color:#e0cbff}.plus{font-size:9px;color:#ffe07d;font-weight:900}
+/* calendar */
+.calendar-layout{height:100%;display:grid;grid-template-rows:54px 1fr}.calendar-wrap{padding:8px 12px 12px;display:grid;grid-template-rows:28px 1fr;min-height:0}.week,.days{display:grid;grid-template-columns:repeat(7,1fr);gap:5px}.week div{text-align:center;font-size:10px;color:var(--muted);font-weight:800}.days{grid-template-rows:repeat(6,minmax(0,1fr));min-height:0}.day{min-height:0;border-radius:12px;background:#10223a;border:1px solid #213a57;padding:6px;position:relative;overflow:hidden}.day.empty{visibility:hidden}.day.today{outline:2px solid var(--cyan)}.day.selected{background:#1c4566;border-color:#65b7ed}.day.before{opacity:.23}.dn{font-size:11px;font-weight:900}.day-balls{display:flex;align-items:center;gap:3px;position:absolute;left:6px;bottom:6px;right:6px;min-width:0}.pokeball{width:15px;height:15px;border-radius:50%;background:linear-gradient(#ef5350 0 45%,#111 45% 56%,#fff 56%);border:1px solid #0b111a;position:relative;flex:0 0 auto}.pokeball:after{width:4px;height:4px;border-width:1px}.ball-num{font-size:9px;color:#ffe284;font-weight:900}.done-dot{position:absolute;right:6px;top:6px;width:6px;height:6px;border-radius:50%;background:var(--green)}
+/* mission history */
+.history-layout{height:100%;display:grid;grid-template-rows:54px 1fr}.history-body{padding:9px;display:grid;grid-template-columns:260px 1fr;gap:9px;min-height:0}.mission-picker{border:1px solid #27415e;border-radius:16px;background:#0c1a2c;padding:10px;min-height:0;overflow:hidden;display:flex;flex-direction:column}.cat-chips{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:8px}.chip{border:1px solid #31516f;background:#142943;color:#c2d1e2;border-radius:99px;padding:5px 8px;font-size:9px;font-weight:800}.chip.active{background:#285276;color:#fff;border-color:#6bb8e7}.mission-list{display:grid;gap:5px;overflow:auto}.mission-btn{border:1px solid #294666;background:#10243c;color:#fff;text-align:left;border-radius:10px;padding:7px 8px;font-size:10px;font-weight:700}.mission-btn.active{background:#1d496a;border-color:#65b7ed}.history-main{display:grid;grid-template-rows:70px 1fr;gap:8px;min-height:0}.mission-summary{display:grid;grid-template-columns:1.5fr repeat(3,.7fr);gap:7px}.sum-card{border:1px solid #284561;background:#10233a;border-radius:14px;padding:9px}.sum-card strong{display:block;font-size:17px}.sum-card span{font-size:9px;color:var(--muted)}.selected-mission strong{font-size:13px}.history-cal{border:1px solid #27415e;border-radius:16px;background:#0b192b;padding:8px;display:grid;grid-template-rows:31px 22px 1fr;min-height:0}.history-cal-head{display:flex;justify-content:space-between;align-items:center}.history-cal-head b{font-size:13px}.hist-week,.hist-days{display:grid;grid-template-columns:repeat(7,1fr);gap:4px}.hist-week div{text-align:center;font-size:9px;color:var(--muted)}.hist-days{grid-template-rows:repeat(6,minmax(0,1fr));min-height:0}.hday{border-radius:10px;background:#10223a;border:1px solid #1f3956;padding:4px;font-size:9px;position:relative}.hday.off{opacity:.22}.hday.empty{visibility:hidden}.hday.scheduled.done{background:#17392e;border-color:#3a8d61}.hday.scheduled.missed{background:#3a2027;border-color:#7f3d49}.hday.scheduled.future{background:#192b45;border-color:#355579}.hstate{position:absolute;bottom:4px;left:4px;right:4px;font-size:8px;font-weight:800;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.scheduled.done .hstate{color:#83e5a0}.scheduled.missed .hstate{color:#ffaaa7}.scheduled.future .hstate{color:#9acbff}
+/* dex */
+.dex-layout{height:100%;display:grid;grid-template-rows:54px 1fr}.dex-grid{overflow:auto;padding:10px;display:grid;grid-template-columns:repeat(8,1fr);gap:7px;align-content:start}.poke{min-height:108px;background:#10223a;border:1px solid #223e5b;border-radius:14px;padding:6px;text-align:center;position:relative}.poke img{width:66px;height:66px;object-fit:contain}.poke.locked img{filter:brightness(0) contrast(.7);opacity:.48}.pn{font-size:9px;font-weight:800;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.caught{font-size:7px;color:#87e59e}.legend{position:absolute;top:4px;right:4px;font-size:6px;background:#463662;color:#e2d5ff;padding:2px 4px;border-radius:99px}
+/* settings */
+.settings-view{height:100%;display:grid;grid-template-rows:54px 1fr}.settings-inline{padding:10px;display:grid;grid-template-columns:240px 1fr;gap:10px;min-height:0}.cat-list{display:flex;flex-direction:column;gap:6px;overflow:auto}.cat-btn{border:1px solid #2a4566;background:#11253f;color:white;border-radius:11px;padding:9px;text-align:left;font-size:11px}.cat-btn.active{background:#1f4566;border-color:#64b9eb}.editor{overflow:auto;background:#0b1728;border:1px solid #223951;border-radius:16px;padding:12px}.field{margin-bottom:10px}.field label{display:block;font-size:10px;color:var(--muted);margin-bottom:4px}.field input{width:100%;background:#10213a;color:white;border:1px solid #33506d;border-radius:9px;padding:8px}.weekday-pills{display:flex;flex-wrap:wrap;gap:5px}.weekday-pills label{display:flex;align-items:center;gap:3px;background:#142843;border:1px solid #2a4561;padding:5px 6px;border-radius:8px;font-size:9px}.task-edit{display:grid;grid-template-columns:1fr auto;gap:5px;margin:5px 0}.task-edit .name{background:#10213a;border:1px solid #33506d;border-radius:9px;padding:7px;color:white}.remove,.smallbtn{border:1px solid #355270;background:#18304d;color:white;border-radius:9px;padding:7px 9px;font-size:10px}.remove{background:#3a1d28;border-color:#6b2b3a;color:#ffb3b0}.addline{display:flex;gap:5px}.addline input{flex:1}.danger{background:#401e27;border-color:#6c303f;color:#ffc2c0}
+/* modal */
+.modal{position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,.66);z-index:50;padding:18px}.modal.open{display:flex}.capture-card{width:min(480px,90vw);background:#0d1b2f;border:1px solid #38506d;border-radius:24px;box-shadow:0 24px 80px #000b;padding:18px;text-align:center}.capture-card img{width:220px;height:220px;object-fit:contain;filter:drop-shadow(0 12px 28px #5ee0ff55)}.capture-card h3{font-size:25px;margin:2px}.capture-card p{font-size:11px;color:var(--muted)}.throw-stage{height:160px;display:grid;place-items:center}.throw-ball{width:58px;height:58px;border-radius:50%;background:linear-gradient(#ef5350 0 45%,#111 45% 56%,#fff 56%);border:3px solid #0b111a;position:relative;box-shadow:0 12px 30px #0008}.throw-ball:after{content:"";position:absolute;left:50%;top:50%;width:14px;height:14px;border-radius:50%;background:#fff;border:3px solid #111;transform:translate(-getCaptureGoal()%,-getCaptureGoal()%)}.capture-card.throwing .throw-ball{animation:ballThrow .8s cubic-bezier(.15,.75,.25,1) forwards}.capture-card.shaking .throw-ball{animation:ballShake .28s ease-in-out 3}.capture-card.reveal .throw-stage{display:none}.capture-card:not(.reveal) #capturedImg,.capture-card:not(.reveal) #capturedName,.capture-card:not(.reveal) #capturedMeta,.capture-card:not(.reveal) #closeCapture{display:none}@keyframes ballThrow{0%{transform:translate(-230px,180px) scale(.45) rotate(-480deg);opacity:.35}60%{transform:translate(0,-24px) scale(1.05) rotate(40deg);opacity:1}100%{transform:translate(0,0) scale(1) rotate(0)}}@keyframes ballShake{0%,100%{transform:rotate(0)}25%{transform:rotate(-13deg)}75%{transform:rotate(13deg)}}.toast{position:fixed;left:50%;bottom:20px;transform:translate(-getCaptureGoal()%,25px);opacity:0;pointer-events:none;background:#152942;border:1px solid #385a7c;color:white;padding:9px 14px;border-radius:12px;transition:.25s;z-index:99;font-size:12px}.toast.show{opacity:1;transform:translate(-getCaptureGoal()%,0)}
+@media(max-width:1050px){.brand h1{font-size:18px}.dex-grid{grid-template-columns:repeat(6,1fr)}.quest-grid{gap:6px;padding:7px}.quest-card{padding:7px}.qname{font-size:10px}.topbar{grid-template-columns:1fr auto auto}.total-balls{min-width:138px}}
+@media(orientation:portrait){.app{grid-template-rows:82px 52px 1fr}.topbar{grid-template-columns:1fr auto}.brand h1{font-size:16px}.total-balls{min-width:128px}.head-actions{display:none}.quest-grid{grid-template-columns:repeat(2,1fr);grid-template-rows:repeat(3,minmax(0,1fr))}.history-body{grid-template-columns:190px 1fr}.dex-grid{grid-template-columns:repeat(4,1fr)}.tab{font-size:10px}.tab .ti{display:none}}
+</style>
+
+
+<style id="gaon-reference-redesign">
+:root{
+  --ivory:#fffaf0;
+  --paper:#fffdf9;
+  --ink:#173458;
+  --muted:#7b8497;
+  --pink:#ff77a8;
+  --pink-soft:#fff0f6;
+  --blue:#6aa7ee;
+  --blue-soft:#eef7ff;
+  --purple:#9c8cf2;
+  --purple-soft:#f3efff;
+  --mint:#9de2bf;
+  --mint-soft:#edfff4;
+  --yellow:#ffd46e;
+  --yellow-soft:#fff8dc;
+  --peach:#ffb49f;
+  --peach-soft:#fff0ea;
+  --line:#eadfd3;
+  --shadow:0 8px 24px rgba(97,72,45,.10);
+}
+*{box-sizing:border-box}
+html,body{
+  height:100%;
+  background:
+    radial-gradient(circle at 12% 8%,rgba(255,235,245,.7),transparent 23%),
+    radial-gradient(circle at 90% 9%,rgba(230,244,255,.72),transparent 22%),
+    linear-gradient(135deg,#fffdf8 0%,#fff8ed 48%,#fffdf8 100%) !important;
+  color:var(--ink)!important;
+}
+body{font-family:-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Pretendard","Noto Sans KR",sans-serif!important}
+.app{
+  max-width:1366px!important;
+  padding:12px 16px 14px!important;
+  grid-template-rows:96px 58px 1fr!important;
+  gap:10px!important;
+}
+.topbar{
+  display:grid!important;
+  grid-template-columns:250px 1fr 310px!important;
+  align-items:center!important;
+  gap:18px!important;
+  padding:10px 16px!important;
+  border-radius:26px!important;
+  background:rgba(255,253,249,.95)!important;
+  border:1px solid #f2e5d9!important;
+  box-shadow:var(--shadow)!important;
+}
+.date-hero{
+  display:flex;align-items:center;gap:10px;
+  padding:12px 14px;border-radius:18px;background:#fff;
+  border:1px solid #eadfd5;box-shadow:0 4px 13px rgba(91,68,44,.07);
+  min-width:0;
+}
+.date-hero-icon{font-size:24px}
+.date-hero b{display:block;font-size:16px;color:#263a5a;white-space:nowrap}
+.date-hero small{font-size:10px;color:#a18e80}
+.hero-brand{text-align:center;justify-content:center!important}
+.hero-brand h1{
+  font-size:27px!important;letter-spacing:-.8px;margin:0!important;
+  overflow:visible!important;text-overflow:clip!important;
+}
+.pink-word{color:#f46fa4}
+.blue-word{color:#4f8ed9}
+.hero-brand small{font-size:12px!important;color:#74819a!important;margin-top:6px!important}
+.header-right{display:flex;justify-content:flex-end;align-items:center;gap:10px}
+.total-balls{
+  min-width:205px!important;height:66px!important;
+  background:#fff!important;border:1px solid #eadfd5!important;
+  box-shadow:0 4px 13px rgba(91,68,44,.07)!important;
+  border-radius:23px!important;color:var(--ink)!important;
+}
+.total-balls span{font-size:10px!important;color:#7c8391!important}
+.total-balls b{display:block!important;font-size:24px!important;color:#263b5c!important;margin-top:2px}
+.total-balls em{font-size:12px;font-style:normal;font-weight:700}
+.settings-shortcut{
+  width:64px;height:66px;border-radius:19px;border:1px solid #eadfd5;background:#fff;
+  color:#23436d;font-weight:800;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:2px;box-shadow:0 4px 13px rgba(91,68,44,.07)
+}
+.settings-shortcut span{font-size:10px}
+.tabs{
+  padding:5px!important;gap:7px!important;
+  background:#fff!important;border:1px solid #eadfd5!important;border-radius:20px!important;
+  box-shadow:0 5px 16px rgba(91,68,44,.07)!important;
+}
+.tab{
+  border-radius:15px!important;background:#fff!important;color:#29476b!important;
+  font-size:12px!important;font-weight:900!important;border:0!important
+}
+.tab.active{
+  background:linear-gradient(135deg,#ff80ae,#ff6a9f)!important;color:white!important;
+  box-shadow:0 6px 14px rgba(255,105,159,.22)!important
+}
+.stage{min-height:0}
+.view{height:100%}
+.panel{
+  background:rgba(255,253,249,.96)!important;border:1px solid #eee1d5!important;
+  border-radius:24px!important;box-shadow:var(--shadow)!important;color:var(--ink)!important;
+}
+.home-dashboard{height:100%;display:grid;grid-template-columns:minmax(0,1fr) 345px;gap:12px}
+.home-main{height:100%;display:grid;grid-template-rows:58px 1fr 46px;overflow:hidden}
+.home-panel-head{border-bottom:1px solid #efe5db!important}
+.panel-head h2{color:#173458!important}
+.muted{color:#8490a3!important}
+.date-nav{gap:6px!important}
+.navbtn,.mini-nav{
+  border:1px solid #e6ddd5!important;background:#fff!important;color:#35597f!important;
+  box-shadow:0 2px 8px rgba(80,60,42,.05)!important
+}
+.datebox{
+  background:#fff!important;border:1px solid #eadfd5!important;color:#29476b!important;
+  min-width:174px!important
+}
+.datebox span{color:#9b8e84!important}
+.day-ball-summary{
+  font-size:11px;font-weight:800;color:#e75d93;background:#fff0f6;border-radius:999px;
+  padding:7px 10px;min-width:74px;text-align:center
+}
+.quest-grid{
+  padding:10px!important;display:grid!important;grid-template-columns:repeat(3,1fr)!important;
+  grid-template-rows:repeat(2,minmax(0,1fr))!important;gap:10px!important;min-height:0
+}
+.quest-card{
+  border-radius:18px!important;padding:10px!important;box-shadow:0 6px 16px rgba(81,67,48,.07)!important;
+  border:1px solid rgba(255,255,255,.9)!important;background:#fff!important
+}
+.quest-card:nth-child(1){background:linear-gradient(145deg,#fff2f7,#ffe7f0)!important}
+.quest-card:nth-child(2){background:linear-gradient(145deg,#f1f9ff,#e4f3ff)!important}
+.quest-card:nth-child(3){background:linear-gradient(145deg,#f5f1ff,#ebe5ff)!important}
+.quest-card:nth-child(4){background:linear-gradient(145deg,#f1fff7,#e3f8ee)!important}
+.quest-card:nth-child(5){background:linear-gradient(145deg,#fff9e4,#fff0bd)!important}
+.quest-card:nth-child(6){background:linear-gradient(145deg,#fff3ef,#ffe5dc)!important}
+.qcard-head{margin-bottom:8px!important}
+.qcard-title{font-size:14px!important;color:#16375d!important}
+.qcount{background:#fff!important;color:#506078!important;border:1px solid rgba(78,96,120,.12)!important}
+.qitems{gap:6px!important}
+.quest{
+  min-height:40px!important;background:rgba(255,255,255,.88)!important;border:1px solid rgba(85,105,130,.10)!important;
+  border-radius:13px!important;color:#1d3859!important
+}
+.quest.done{background:#f3fff7!important;border-color:#b8e8ca!important}
+.quest.future{opacity:.6}
+.check{
+  background:#fff!important;border:2px solid #bcc8d5!important;color:#fff!important;border-radius:7px!important
+}
+.done .check{background:#76cfa0!important;border-color:#76cfa0!important}
+.qname{font-size:11px!important;color:#1f3c61!important}
+.qdetail{color:#8f98a8!important}
+.optional{background:#fff3f8!important;color:#d06391!important}
+.plus{color:#e56799!important}
+.cheer-strip{
+  margin:0 10px 9px;padding:10px 14px;background:#fff;border:1px solid #efe2d6;border-radius:17px;
+  font-size:11px;color:#2f4d72;font-weight:800;display:flex;align-items:center;justify-content:space-between
+}
+.cheer-strip span{color:#ee6fa0}
+.home-side{display:grid;grid-template-rows:220px minmax(0,1fr) 128px;gap:10px;min-height:0}
+.side-card{
+  background:#fff;border:1px solid #eee1d5;border-radius:22px;box-shadow:var(--shadow);padding:14px;overflow:hidden
+}
+.side-ribbon{
+  background:linear-gradient(90deg,#fff0f6,#ffe9f2);color:#ef5f95;border-radius:14px;
+  padding:9px 12px;text-align:center;font-size:13px;font-weight:900;margin-bottom:13px
+}
+.capture-progress-row{display:flex;align-items:center;gap:12px}
+.side-ball{width:42px!important;height:42px!important}
+.capture-progress-wrap{display:grid;grid-template-columns:1fr auto;gap:8px;align-items:center;flex:1}
+.capture-progress-track{height:18px;border-radius:999px;background:#f1f5f8;overflow:hidden;border:1px solid #e0e7ed}
+.capture-progress-fill{height:100%;width:0;background:linear-gradient(90deg,#9ecfff,#78b9f4);border-radius:999px;transition:.3s}
+.capture-progress-wrap b{font-size:13px;color:#263b5c}
+.capture-side-card p{font-size:10px;color:#77859a;text-align:center;margin:12px 0 10px}
+.capture-main-btn{
+  width:100%;border:0;border-radius:16px;padding:12px 8px;background:linear-gradient(135deg,#ff78aa,#ff6299);
+  color:#fff;font-size:14px;font-weight:900;box-shadow:0 6px 15px rgba(255,98,153,.25)
+}
+.capture-main-btn:disabled{opacity:.48;box-shadow:none}
+.mini-calendar-card{padding:12px}
+.mini-cal-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+.mini-cal-head b{font-size:14px;color:#29476b}
+.mini-nav{border-radius:50%!important;width:28px;height:28px;padding:0!important}
+.mini-week,.mini-days{display:grid;grid-template-columns:repeat(7,1fr);gap:4px}
+.mini-week span{text-align:center;font-size:9px;font-weight:800;color:#78869a}
+.mini-week span:first-child{color:#f06c8d}.mini-week span:last-child{color:#5f9ee5}
+.mini-days{grid-template-rows:repeat(6,minmax(0,1fr));height:calc(100% - 44px)}
+.mini-day{
+  min-height:0;border:1px solid #eee7e1;border-radius:9px;background:#fff;padding:3px;position:relative;
+  font-size:9px;color:#4d6079;cursor:pointer
+}
+.mini-day.empty{visibility:hidden}.mini-day.before{opacity:.2}.mini-day.today{background:#ff7ba9;color:#fff;border-color:#ff7ba9}
+.mini-day.selected:not(.today){outline:2px solid #a9ccef}
+.mini-ball-wrap{position:absolute;left:3px;right:3px;bottom:2px;display:flex;align-items:center;gap:2px}
+.mini-pokeball{width:11px;height:11px;border-radius:50%;background:linear-gradient(#ef5350 0 45%,#111 45% 56%,#fff 56%);border:1px solid #1e2430;position:relative}
+.mini-pokeball:after{content:"";position:absolute;width:3px;height:3px;border-radius:50%;background:#fff;border:1px solid #111;left:50%;top:50%;transform:translate(-getCaptureGoal()%,-getCaptureGoal()%)}
+.mini-ball-num{font-size:7px;font-weight:900}
+.encouragement-card{
+  background:linear-gradient(145deg,#fff7fb,#fff0f6);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center
+}
+.heart-row{font-size:14px;font-weight:900;color:#ef6f9f;margin-bottom:9px}
+.encouragement-card p{font-size:11px;line-height:1.7;color:#5c708d;margin:0}
+.calendar-layout,.history-layout,.dex-layout,.settings-view{
+  background:#fffdf9!important
+}
+.calendar-wrap,.history-body,.dex-grid,.settings-inline{background:#fffdf9}
+.day,.hday,.poke,.mission-picker,.sum-card,.history-cal,.cat-btn,.editor{
+  background:#fff!important;color:#29476b!important;border-color:#eadfd5!important
+}
+.day.selected{background:#fff0f6!important;border-color:#f3a4c1!important}
+.day.today{outline:2px solid #78b9f4!important}
+.day-balls .ball-num{color:#e56799!important}
+.mission-btn,.chip,.smallbtn,.field input,.field select,.task-edit input,.addline input{
+  background:#fff!important;color:#29476b!important;border-color:#ded7d0!important
+}
+.mission-btn.active,.chip.active,.cat-btn.active{
+  background:#eef7ff!important;color:#315e90!important;border-color:#a9ccef!important
+}
+.poke.locked{background:#faf7f2!important}
+.pn{color:#29476b!important}.caught{color:#56a978!important}
+.primary{background:linear-gradient(135deg,#ff78aa,#ff6299)!important;color:white!important;border:0!important}
+.modal{background:rgba(86,72,68,.36)!important}
+.capture-card{background:#fffdf9!important;color:#29476b!important;border:1px solid #eadfd5!important}
+.toast{background:#29476b!important;color:#fff!important}
+@media(max-width:1100px){
+  .topbar{grid-template-columns:220px 1fr 250px!important}
+  .hero-brand h1{font-size:22px!important}
+  .home-dashboard{grid-template-columns:minmax(0,1fr) 300px}
+}
+@media(orientation:portrait){
+  .app{grid-template-rows:102px 58px 1fr!important}
+  .topbar{grid-template-columns:190px 1fr!important}
+  .hero-brand{text-align:left!important}
+  .header-right{grid-column:1/-1;position:absolute;right:28px;top:23px}
+  .date-hero{display:none}
+  .total-balls{min-width:180px!important}
+  .settings-shortcut{display:none}
+  .home-dashboard{grid-template-columns:1fr}
+  .home-side{display:none}
+  .quest-grid{grid-template-columns:repeat(2,1fr)!important;grid-template-rows:repeat(3,minmax(0,1fr))!important}
+}
+</style>
+
+
+<style id="gaon-mission-icon-style">
+.mission-icon{
+  width:26px;height:26px;min-width:26px;border-radius:9px;
+  display:inline-flex;align-items:center;justify-content:center;
+  font-size:16px;line-height:1;background:rgba(255,255,255,.82);
+  box-shadow:0 2px 7px rgba(72,64,54,.07);
+  margin-right:7px;
+}
+.quest .qtext{display:flex;align-items:center;min-width:0;flex:1}
+.quest .qcopy{min-width:0;display:flex;flex-direction:column}
+</style>
+
+
+<style id="gaon-capture-goal-style">
+.capture-goal-setting{
+  background:linear-gradient(145deg,#fff8fc,#f7fbff);
+  border:1px solid #eadfd5;
+  border-radius:18px;
+  padding:14px;
+  margin:12px;
+  box-shadow:0 5px 16px rgba(91,68,44,.06);
+}
+.capture-goal-setting label{
+  display:block;
+  font-size:13px;
+  font-weight:900;
+  color:#29476b;
+  margin-bottom:8px;
+}
+.capture-goal-row{
+  display:flex;
+  align-items:center;
+  gap:8px;
+}
+.capture-goal-row input{
+  width:110px;
+  padding:9px 10px;
+  border-radius:12px;
+  border:1px solid #ded7d0;
+  background:#fff;
+  color:#29476b;
+  font-size:14px;
+  font-weight:800;
+}
+.capture-goal-row span{
+  font-size:12px;
+  color:#6f7c8e;
+  font-weight:800;
+}
+.capture-goal-setting small{
+  display:block;
+  margin-top:8px;
+  color:#8d98a7;
+  font-size:10px;
+}
+</style>
+
+</head>
+<body>
+<div class="app">
+  
+<header class="topbar">
+  <div class="date-hero" id="heroDateButton">
+    <span class="date-hero-icon">📅</span>
+    <div>
+      <b id="heroDateText">2026년 9월 13일 (일)</b>
+      <small>훈련 날짜</small>
+    </div>
+  </div>
+
+  <div class="brand hero-brand">
+    <div>
+      <h1><span class="pink-word">가온이의</span> <span class="blue-word">포켓몬 트레이너 훈련일지</span></h1>
+      <small>오늘도 멋진 하루! 작은 습관이 특별한 나를 만들어요! ♡</small>
+    </div>
+  </div>
+
+  <div class="header-right">
+    <div class="total-balls">
+      <div class="ball-big"></div>
+      <div><span>보유 몬스터볼</span><b id="headerBalls">0 <em>개</em></b></div>
+    </div>
+    <button class="settings-shortcut" id="settingsShortcut" aria-label="훈련 설정">⚙️<span>설정</span></button>
+  </div>
+</header>
+  <nav class="tabs">
+    <button class="tab active" data-tab="quests"><span class="ti">⚡</span>오늘의 훈련</button>
+    <button class="tab" data-tab="calendar"><span class="ti">🗓️</span>몬스터볼 캘린더</button>
+    <button class="tab" data-tab="history"><span class="ti">🎯</span>미션 기록</button>
+    <button class="tab" data-tab="dex"><span class="ti">📖</span>포켓몬 도감</button>
+    <button class="tab" data-tab="settings"><span class="ti">⚙️</span>훈련 설정</button>
+  </nav>
+  <main class="stage">
+    
+<section class="view active" id="view-quests">
+  <div class="home-dashboard">
+    <div class="home-main panel">
+      <div class="panel-head home-panel-head">
+        <div>
+          <h2>오늘의 트레이너 훈련</h2>
+          <div class="muted" id="questSummary"></div>
+        </div>
+        <div class="date-nav">
+          <button class="navbtn" id="prevDay">◀</button>
+          <button class="datebox" id="todayBtn"><b id="selectedDateText"></b><span id="dateStatus"></span></button>
+          <button class="navbtn" id="nextDay">▶</button>
+        </div>
+        <div class="day-ball-summary" id="dayBalls"></div>
+      </div>
+      <div class="quest-grid" id="questGrid"></div>
+      <div class="cheer-strip">⭐ “매일의 작은 노력이, 특별한 가온이를 만들어줘요!” <span>♡ 가온이, 오늘도 화이팅!</span></div>
+    </div>
+
+    <aside class="home-side">
+      <section class="side-card capture-side-card">
+        <div class="side-ribbon">포켓몬과 만나는 그날까지!</div>
+        <div class="capture-progress-row">
+          <div class="ball-big side-ball"></div>
+          <div class="capture-progress-wrap">
+            <div class="capture-progress-track"><div class="capture-progress-fill" id="homeCaptureProgress"></div></div>
+            <b id="homeCaptureText">0 / 50</b>
+          </div>
+        </div>
+        <p>몬스터볼을 50개 모으면 새로운 포켓몬을 만날 수 있어요!</p>
+        <button class="capture-main-btn" id="captureBtn">포획까지 50개</button>
+      </section>
+
+      <section class="side-card mini-calendar-card">
+        <div class="mini-cal-head">
+          <b id="miniMonthTitle">9월 2026</b>
+          <div>
+            <button class="mini-nav" id="miniPrevMonth">◀</button>
+            <button class="mini-nav" id="miniNextMonth">▶</button>
+          </div>
+        </div>
+        <div class="mini-week"><span>일</span><span>월</span><span>화</span><span>수</span><span>목</span><span>금</span><span>토</span></div>
+        <div class="mini-days" id="miniCalendarDays"></div>
+      </section>
+
+      <section class="side-card encouragement-card">
+        <div class="heart-row">♡ 오늘도 수고했어요! ♡</div>
+        <p>지금처럼만 하면 가온이는 무엇이든 해낼 수 있어요!</p>
+      </section>
+    </aside>
+  </div>
+</section>
+<section class="view" id="view-calendar">
+      <div class="panel calendar-layout"><div class="panel-head"><div><h2>몬스터볼 캘린더</h2><div class="muted">날짜별 획득 몬스터볼을 한눈에 확인</div></div><div class="date-nav"><button class="navbtn" id="prevMonth">◀</button><div class="datebox"><b id="monthTitle"></b><span>날짜를 누르면 그날 훈련으로 이동</span></div><button class="navbtn" id="nextMonth">▶</button></div><div class="muted">● 완료 기록 있음</div></div><div class="calendar-wrap"><div class="week"><div>일</div><div>월</div><div>화</div><div>수</div><div>목</div><div>금</div><div>토</div></div><div class="days" id="calendarDays"></div></div></div>
+    </section>
+    <section class="view" id="view-history">
+      <div class="panel history-layout"><div class="panel-head"><div><h2>미션 수행 기록</h2><div class="muted">각 미션을 해야 하는 날과 실제 완료한 날 비교</div></div><div class="date-nav"><button class="navbtn" id="histPrevMonth">◀</button><div class="datebox"><b id="histMonthTitle"></b><span>미션별 월간 기록</span></div><button class="navbtn" id="histNextMonth">▶</button></div><div></div></div><div class="history-body"><aside class="mission-picker"><div class="cat-chips" id="historyCats"></div><div class="mission-list" id="historyMissions"></div></aside><div class="history-main"><div class="mission-summary"><div class="sum-card selected-mission"><strong id="histTaskName">미션을 선택하세요</strong><span id="histTaskDays"></span></div><div class="sum-card"><strong id="histScheduled">0</strong><span>해야 했던 날</span></div><div class="sum-card"><strong id="histDone">0</strong><span>완료한 날</span></div><div class="sum-card"><strong id="histRate">0%</strong><span>완료율</span></div></div><div class="history-cal"><div class="history-cal-head"><b id="historyCalendarTitle"></b><span class="muted">초록 완료 · 빨강 미완료 · 파랑 예정</span></div><div class="hist-week"><div>일</div><div>월</div><div>화</div><div>수</div><div>목</div><div>금</div><div>토</div></div><div class="hist-days" id="historyDays"></div></div></div></div></div>
+    </section>
+    <section class="view" id="view-dex"><div class="panel dex-layout"><div class="panel-head"><div><h2>포켓몬 탐험 도감</h2><div class="muted">잡기 전에는 실루엣, 포획 후에는 날짜와 함께 기록</div></div><div><b id="caughtCount">0</b><span class="muted"> / <span id="dexTotal"></span> 포획</span></div><div class="muted">50개마다 중복 없이 1마리 포획</div></div><div class="dex-grid" id="collectionGrid"></div></div></section>
+    <section class="view" id="view-settings">
+<div class="capture-goal-setting" id="captureGoalSetting">
+  <div class="field">
+    <label for="captureGoalInput">포켓몬 포획 목표 몬스터볼</label>
+    <div class="capture-goal-row">
+      <input id="captureGoalInput" type="number" min="1" max="999" step="1" inputmode="numeric" />
+      <span>개</span>
+      <button class="smallbtn" id="saveCaptureGoalBtn">적용</button>
+    </div>
+    <small>원하는 숫자로 바꾸면 포획 게이지와 포획 조건에 바로 반영됩니다.</small>
+  </div>
+</div>
+<div class="panel settings-view"><div class="panel-head"><div><h2>훈련 스케줄 설정</h2><div class="muted">영역·활동·요일·선택 미션을 언제든 수정</div></div><button class="primary" id="addCategory">＋ 새 훈련 영역</button><div class="muted">변경 내용은 자동 저장</div></div><div class="settings-inline"><div class="cat-list" id="catList"></div><div class="editor" id="categoryEditor"></div></div></div></section>
+  </main>
+</div>
+<div class="modal" id="captureModal"><div class="capture-card"><div class="throw-stage" id="throwStage"><div class="throw-ball" id="throwBall"></div></div><img id="capturedImg"><h3 id="capturedName"></h3><p id="capturedMeta"></p><button class="primary" id="closeCapture">도감에 기록하기</button></div></div>
+<div class="toast" id="toast"></div>
+<script>
+const START = new Date('2026-09-13T00:00:00');
+const DAYS=['일','월','화','수','목','금','토'];
+const DEFAULT_CATEGORIES=[
+ {id:'habit',name:'베이스캠프 준비',icon:'🎒',tasks:[
+  {id:'schoolbag',name:'책가방 정리',detail:'물통·양치도구 꺼내기, 아침 독서 책, 필통, 우체통 확인',days:[1,2,3,4,5],optional:false},{id:'academybag',name:'학원 가방 정리',detail:'',days:[1,2,3,4,5],optional:false},{id:'phone',name:'핸드폰 충전하기',detail:'',days:[0,1,2,3,4,5,6],optional:false},{id:'water',name:'물 2잔 마시기',detail:'',days:[0,1,2,3,4,5,6],optional:false},
+          { id: "base-wash-lotion", name: "세수하고 로션바르기", days: [0,1,2,3,4,5,6], optional: false },
+          { id: "base-vitamin", name: "영양제 먹기", days: [0,1,2,3,4,5,6], optional: false }]},
+ {id:'english',name:'영어 스킬 트레이닝',icon:'📘',tasks:[{id:'engacademy',name:'영어학원 숙제',detail:'',days:[1,2,3,4,5],optional:false},{id:'engbooks',name:'영어책 읽기 (5권)',detail:'',days:[0,1,2,3,4,5,6],optional:false},{id:'multiread',name:'멀티플리딩스킬 풀기',detail:'',days:[1,2,3,4,5],optional:false},{id:'grammar',name:'문법 공부',detail:'',days:[0,6],optional:false},{id:'vocab',name:'단어 공부',detail:'',days:[0,6],optional:false}]},
+ {id:'math',name:'수학 배틀 트레이닝',icon:'🧮',tasks:[{id:'wonrisem',name:'원리셈',detail:'',days:[0,1,2,3,4,5,6],optional:false},{id:'didimdol',name:'디딤돌',detail:'',days:[0,1,2,3,4,5,6],optional:false},{id:'facto',name:'팩토',detail:'',days:[0,6],optional:false}]},
+ {id:'korean',name:'한글·한자 연구소',icon:'✍️',tasks:[{id:'hanja',name:'하루 한장 한자',detail:'',days:[0,2,5],optional:false},
+          { id: "korean-dictation-practice", name: "받아쓰기 2회 연습하기", days: [0], optional: false },
+          { id: "korean-dictation-check", name: "받아쓰기 결과 확인받기", days: [4], optional: false }]},
+ {id:'exercise',name:'체력 스탯 업',icon:'⚡',tasks:[{id:'stretch',name:'스트레칭하기',detail:'선택 퀘스트',days:[0,1,2,3,4,5,6],optional:true},{id:'rope',name:'줄넘기하기',detail:'선택 퀘스트',days:[0,1,2,3,4,5,6],optional:true}]},
+ {id:'piano',name:'리듬 스킬 연습',icon:'🎹',tasks:[{id:'piano',name:'피아노 연습',detail:'선택 퀘스트',days:[0,6],optional:true}]}
+];
+const POKEMON=[
+ [144,'프리져',1],[145,'썬더',1],[146,'파이어',1],[150,'뮤츠',1],[243,'라이코',1],[244,'앤테이',1],[245,'스이쿤',1],[249,'루기아',1],[250,'칠색조',1],[377,'레지락',1],[378,'레지아이스',1],[379,'레지스틸',1],[380,'라티아스',1],[381,'라티오스',1],[382,'가이오가',1],[383,'그란돈',1],[384,'레쿠쟈',1],[480,'유크시',1],[481,'엠라이트',1],[482,'아그놈',1],[483,'디아루가',1],[484,'펄기아',1],[485,'히드런',1],[486,'레지기가스',1],[487,'기라티나',1],[488,'크레세리아',1],[638,'코바르온',1],[639,'테라키온',1],[640,'비리디온',1],[641,'토네로스',1],[642,'볼트로스',1],[643,'레시라무',1],[644,'제크로무',1],[645,'랜드로스',1],[646,'큐레무',1],[716,'제르네아스',1],[717,'이벨타르',1],[718,'지가르데',1],[772,'타입:널',1],[773,'실버디',1],[785,'카푸꼬꼬꼭',1],[786,'카푸나비나',1],[787,'카푸브루루',1],[788,'카푸느지느',1],[789,'코스모그',1],[790,'코스모움',1],[791,'솔가레오',1],[792,'루나아라',1],[800,'네크로즈마',1],[888,'자시안',1],[889,'자마젠타',1],[890,'무한다이노',1],[891,'치고마',1],[892,'우라오스',1],[894,'레지에레키',1],[895,'레지드래고',1],[896,'블리자포스',1],[897,'레이스포스',1],[898,'버드렉스',1],[1001,'총지엔',1],[1002,'파오젠',1],[1003,'딩루',1],[1004,'위유이',1],[1007,'코라이돈',1],[1008,'미라이돈',1],[1014,'조타구',1],[1015,'이야후',1],[1016,'기로치',1],[1017,'오거폰',1],[1024,'테라파고스',1],
+ [151,'뮤',0],[251,'세레비',0],[385,'지라치',0],[386,'테오키스',0],[491,'다크라이',0],[492,'쉐이미',0],[493,'아르세우스',0],[494,'비크티니',0],[647,'케르디오',0],[649,'게노세크트',0],[719,'디안시',0],[720,'후파',0],[721,'볼케니온',0],[801,'마기아나',0],[802,'마샤도',0],[807,'제라오라',0],[808,'멜탄',0],[809,'멜메탈',0],[893,'자루도',0],[25,'피카츄',0],[6,'리자몽',0],[133,'이브이',0],[134,'샤미드',0],[135,'쥬피썬더',0],[136,'부스터',0],[196,'에브이',0],[197,'블래키',0],[470,'리피아',0],[471,'글레이시아',0],[700,'님피아',0],[175,'토게피',0],[152,'치코리타',0],[194,'우파',0],[172,'피츄',0],[173,'삐',0],[174,'푸푸린',0],[183,'마릴',0],[216,'깜지곰',0],[300,'에나비',0],[311,'플러시',0],[312,'마이농',0],[417,'파치리스',0],[587,'에몽가',0],[94,'팬텀',0],[143,'잠만보',0],[149,'망나뇽',0],[248,'마기라스',0],[282,'가디안',0],[359,'앱솔',0],[376,'메타그로스',0],[445,'한카리아스',0],[448,'루카리오',0],[571,'조로아크',0],[658,'개굴닌자',0],[724,'모크나이퍼',0],[815,'에이스번',0],[908,'마스카나',0],[959,'두드리짱',0]
+].map(([id,name,legendary])=>({id,name,legendary,src:`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${id}.png`}));
+const key='trainer_daily_quest_v1';
+let state=loadState(); let selectedDate=maxDate(new Date(),START); let calCursor=new Date(selectedDate.getFullYear(),selectedDate.getMonth(),1); let histCursor=new Date(selectedDate.getFullYear(),selectedDate.getMonth(),1); let editingCatId=state.categories[0]?.id; let historyCatId=state.categories[0]?.id; let historyTaskId=state.categories[0]?.tasks[0]?.id;
+function loadState(){try{const raw=localStorage.getItem(key);if(raw){const s=JSON.parse(raw);if(!s.categories)s.categories=structuredClone(DEFAULT_CATEGORIES);if(!s.records)s.records={};if(!s.caught)s.caught={};if(typeof s.spentBalls!=='number')s.spentBalls=0;return s}}catch(e){}return{categories:structuredClone(DEFAULT_CATEGORIES),records:{},caught:{},spentBalls:0}}
+function save(){localStorage.setItem(key,JSON.stringify(state))} function dkey(d){return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`} function sameDay(a,b){return dkey(a)===dkey(b)} function maxDate(a,b){return a<b?new Date(b):new Date(a.getFullYear(),a.getMonth(),a.getDate())} function isFuture(d){const t=new Date();t.setHours(0,0,0,0);return d>t} function recFor(d){const k=dkey(d);if(!state.records[k])state.records[k]={done:{}};return state.records[k]} function lifetimeBalls(){return Object.values(state.records).reduce((sum,r)=>sum+Object.values(r.done||{}).filter(Boolean).length,0)} function availableBalls(){return Math.max(0,lifetimeBalls()-state.spentBalls)} function dayDoneCount(d){const r=state.records[dkey(d)];return r?Object.values(r.done||{}).filter(Boolean).length:0} function escapeHtml(s=''){return String(s).replace(/[&<>'"]/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[m]))} function toast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),1600)}
+function tasksFor(d){const day=d.getDay(),out=[];state.categories.forEach(c=>c.tasks.filter(t=>t.days.includes(day)).forEach(t=>out.push({...t,catId:c.id,catName:c.name,icon:c.icon||'⭐'})));return out}
+function render(){renderHeader();renderQuests();renderCalendar();renderHistory();renderDex();renderSettings()}
+function renderHeader(){const avail=availableBalls();document.getElementById('headerBalls').textContent=avail;const btn=document.getElementById('captureBtn');const unowned=POKEMON.length-Object.keys(state.caught).length;btn.disabled=avail<50||unowned===0;btn.style.opacity=btn.disabled?'.45':'1';btn.textContent=unowned===0?'도감 완성!':avail>=50?'🔴 몬스터볼 던지기':`포획까지 ${50-(avail%getCaptureGoal())}개`;const opts={month:'long',day:'numeric',weekday:'short'};document.getElementById('selectedDateText').textContent=selectedDate.toLocaleDateString('ko-KR',opts);document.getElementById('dateStatus').textContent=sameDay(selectedDate,new Date())?'오늘':isFuture(selectedDate)?'미리 보는 일정':'지난 기록'}
+function renderQuests(){const grid=document.getElementById('questGrid');grid.innerHTML='';const day=selectedDate.getDay(),r=recFor(selectedDate),future=isFuture(selectedDate);let required=0,requiredDone=0,totalDone=0;state.categories.forEach(cat=>{const ct=cat.tasks.filter(t=>t.days.includes(day));const card=document.createElement('div');card.className='quest-card';card.innerHTML=`<div class="qcard-head"><div class="qcard-title">${cat.icon||'⭐'} ${escapeHtml(cat.name)}</div><span class="qcount">${ct.length}개</span></div><div class="qitems"></div>`;const items=card.querySelector('.qitems');if(!ct.length){items.innerHTML='<div class="muted" style="padding:8px">오늘은 이 영역의 훈련이 없어요.</div>'}ct.forEach(t=>{if(!t.optional){required++;if(r.done[t.id])requiredDone++}if(r.done[t.id])totalDone++;const q=document.createElement('div');q.className='quest'+(r.done[t.id]?' done':'')+(future?' future':'');q.innerHTML=`<button class="check" ${future?'disabled':''}>${r.done[t.id]?'✓':''}</button><div class="qtext"><span class="mission-icon">${gaonMissionIcon(t.name)}</span><div class="qcopy"><div class="qname">${escapeHtml(t.name)} ${t.optional?'<span class="optional">선택</span>':''}</div>${t.detail?`<div class="qdetail">${escapeHtml(t.detail)}</div>`:''}</div></div><div class="plus">+1</div>`;q.querySelector('.check').onclick=()=>toggleTask(t.id);items.appendChild(q)});grid.appendChild(card)});document.getElementById('questSummary').textContent=`필수 훈련 ${requiredDone}/${required} 완료`;document.getElementById('dayBalls').textContent=`오늘 획득 ${totalDone}개`}
+function toggleTask(id){if(isFuture(selectedDate)){toast('미래 일정은 미리 확인만 할 수 있어요.');return}const r=recFor(selectedDate);r.done[id]=!r.done[id];save();render();if(r.done[id])toast('몬스터볼 +1!')}
+function renderCalendar(){document.getElementById('monthTitle').textContent=`${calCursor.getFullYear()}년 ${calCursor.getMonth()+1}월`;const wrap=document.getElementById('calendarDays');wrap.innerHTML='';const y=calCursor.getFullYear(),m=calCursor.getMonth(),first=new Date(y,m,1).getDay(),last=new Date(y,m+1,0).getDate();for(let i=0;i<first;i++){const e=document.createElement('div');e.className='day empty';wrap.appendChild(e)}for(let n=1;n<=last;n++){const d=new Date(y,m,n),count=dayDoneCount(d),cell=document.createElement('div');cell.className='day'+(sameDay(d,new Date())?' today':'')+(sameDay(d,selectedDate)?' selected':'')+(d<START?' before':'');cell.innerHTML=`<div class="dn">${n}</div>${count?'<div class="done-dot"></div>':''}${count?`<div class="day-balls"><span class="pokeball"></span><span class="ball-num">× ${count}</span></div>`:''}`;if(d>=START)cell.onclick=()=>{selectedDate=d;calCursor=new Date(d.getFullYear(),d.getMonth(),1);switchTab('quests');render()};wrap.appendChild(cell)}}
+function getTaskInfo(taskId){for(const c of state.categories){const t=c.tasks.find(x=>x.id===taskId);if(t)return{c,t}}return null}
+function renderHistory(){if(!state.categories.find(c=>c.id===historyCatId))historyCatId=state.categories[0]?.id;const cat=state.categories.find(c=>c.id===historyCatId);if(cat&&!cat.tasks.find(t=>t.id===historyTaskId))historyTaskId=cat.tasks[0]?.id;const cats=document.getElementById('historyCats');cats.innerHTML='';state.categories.forEach(c=>{const b=document.createElement('button');b.className='chip '+(c.id===historyCatId?'active':'');b.textContent=`${c.icon||'⭐'} ${c.name}`;b.onclick=()=>{historyCatId=c.id;historyTaskId=c.tasks[0]?.id;renderHistory()};cats.appendChild(b)});const ml=document.getElementById('historyMissions');ml.innerHTML='';(cat?.tasks||[]).forEach(t=>{const b=document.createElement('button');b.className='mission-btn '+(t.id===historyTaskId?'active':'');b.textContent=t.name;b.onclick=()=>{historyTaskId=t.id;renderHistory()};ml.appendChild(b)});const info=getTaskInfo(historyTaskId);const task=info?.t;document.getElementById('histMonthTitle').textContent=`${histCursor.getFullYear()}년 ${histCursor.getMonth()+1}월`;document.getElementById('historyCalendarTitle').textContent=`${histCursor.getFullYear()}년 ${histCursor.getMonth()+1}월 수행 현황`;document.getElementById('histTaskName').textContent=task?`${info.c.icon||'⭐'} ${task.name}`:'미션 없음';document.getElementById('histTaskDays').textContent=task?`훈련 요일: ${task.days.map(d=>DAYS[d]).join('·')}요일${task.optional?' · 선택 미션':''}`:'';const wrap=document.getElementById('historyDays');wrap.innerHTML='';const y=histCursor.getFullYear(),m=histCursor.getMonth(),first=new Date(y,m,1).getDay(),last=new Date(y,m+1,0).getDate();for(let i=0;i<first;i++){const e=document.createElement('div');e.className='hday empty';wrap.appendChild(e)}let scheduled=0,done=0;const today=new Date();today.setHours(0,0,0,0);for(let n=1;n<=last;n++){const d=new Date(y,m,n),el=document.createElement('div');let cls='hday',stateTxt='';const sched=task&&task.days.includes(d.getDay())&&d>=START;if(!sched)cls+=' off';else{scheduled++;const wasDone=!!state.records[dkey(d)]?.done?.[task.id];if(wasDone){done++;cls+=' scheduled done';stateTxt='✓ 완료'}else if(d>today){cls+=' scheduled future';stateTxt='예정'}else{cls+=' scheduled missed';stateTxt='미완료'}}el.className=cls;el.innerHTML=`<b>${n}</b>${stateTxt?`<div class="hstate">${stateTxt}</div>`:''}`;wrap.appendChild(el)}document.getElementById('histScheduled').textContent=scheduled;document.getElementById('histDone').textContent=done;const pastSched=[...Array(last)].map((_,i)=>new Date(y,m,i+1)).filter(d=>task&&task.days.includes(d.getDay())&&d>=START&&d<=today).length;document.getElementById('histRate').textContent=`${pastSched?Math.round(done/pastSched*100):0}%`}
+function renderDex(){const grid=document.getElementById('collectionGrid');grid.innerHTML='';document.getElementById('caughtCount').textContent=Object.keys(state.caught).length;document.getElementById('dexTotal').textContent=POKEMON.length;POKEMON.forEach(p=>{const c=state.caught[p.id],el=document.createElement('div');el.className='poke '+(c?'':'locked');el.innerHTML=`${c&&p.legendary?'<span class="legend">LEGEND</span>':''}<img loading="lazy" src="${p.src}" alt="${c?p.name:'미발견 포켓몬'}"><div class="pn">${c?p.name:'???'}</div><div class="caught">${c?`포획 ${c.date}`:'미발견'}</div>`;grid.appendChild(el)})}
+function capture(){if(availableBalls()<getCaptureGoal())return;const unowned=POKEMON.filter(p=>!state.caught[p.id]);if(!unowned.length)return;const p=unowned[Math.floor(Math.random()*unowned.length)],now=new Date();state.spentBalls+=getCaptureGoal();state.caught[p.id]={date:dkey(now),time:now.toISOString()};save();const modal=document.getElementById('captureModal'),card=modal.querySelector('.capture-card');document.getElementById('capturedImg').src=p.src;document.getElementById('capturedName').textContent=p.name;document.getElementById('capturedMeta').textContent=`${dkey(now)} · 포획 성공!`;card.classList.remove('throwing','shaking','reveal');modal.classList.add('open');void card.offsetWidth;card.classList.add('throwing');setTimeout(()=>{card.classList.remove('throwing');card.classList.add('shaking')},820);setTimeout(()=>{card.classList.remove('shaking');card.classList.add('reveal');render()},1750)}
+function renderSettings(){const list=document.getElementById('catList');list.innerHTML='';state.categories.forEach(c=>{const b=document.createElement('button');b.className='cat-btn '+(c.id===editingCatId?'active':'');b.textContent=`${c.icon||'⭐'} ${c.name}`;b.onclick=()=>{editingCatId=c.id;renderSettings()};list.appendChild(b)});const c=state.categories.find(x=>x.id===editingCatId);const ed=document.getElementById('categoryEditor');if(!c){ed.innerHTML='<div class="muted">훈련 영역을 추가해 주세요.</div>';return}ed.innerHTML=`<div class="field"><label>영역 이름</label><input id="catName" value="${escapeHtml(c.name)}"></div><div class="field"><label>아이콘</label><input id="catIcon" value="${escapeHtml(c.icon||'⭐')}"></div><div class="field"><label>활동 목록</label><div id="taskEditor"></div></div><div class="addline"><input id="newTaskName" placeholder="새 활동 이름"><button class="smallbtn" id="addTask">＋ 추가</button></div><div style="margin-top:12px"><button class="smallbtn danger" id="deleteCat">이 영역 삭제</button></div>`;document.getElementById('catName').oninput=e=>{c.name=e.target.value;save()};document.getElementById('catIcon').oninput=e=>{c.icon=e.target.value;save()};renderTaskEditor(c);document.getElementById('addTask').onclick=()=>{const v=document.getElementById('newTaskName').value.trim();if(!v)return;c.tasks.push({id:'t'+Date.now(),name:v,detail:'',days:[0,1,2,3,4,5,6],optional:false});save();renderSettings();renderHistory()};document.getElementById('deleteCat').onclick=()=>{if(state.categories.length===1){toast('영역은 최소 1개가 필요해요.');return}state.categories=state.categories.filter(x=>x.id!==c.id);editingCatId=state.categories[0].id;save();render()}}
+function renderTaskEditor(c){const wrap=document.getElementById('taskEditor');wrap.innerHTML='';c.tasks.forEach(t=>{const box=document.createElement('div');box.style.cssText='background:#10213a;border:1px solid #294564;border-radius:12px;padding:7px;margin:6px 0';box.innerHTML=`<div class="task-edit"><input class="name" value="${escapeHtml(t.name)}"><button class="remove">삭제</button></div><div class="weekday-pills">${DAYS.map((d,i)=>`<label><input type="checkbox" data-day="${i}" ${t.days.includes(i)?'checked':''}>${d}</label>`).join('')}<label><input type="checkbox" data-opt ${t.optional?'checked':''}>선택</label></div><div style="margin-top:5px"><input class="name detail" style="width:100%" placeholder="설명(선택)" value="${escapeHtml(t.detail||'')}"></div>`;box.querySelector('.name').oninput=e=>{t.name=e.target.value;save()};box.querySelector('.detail').oninput=e=>{t.detail=e.target.value;save()};box.querySelector('.remove').onclick=()=>{c.tasks=c.tasks.filter(x=>x.id!==t.id);save();render()};box.querySelectorAll('[data-day]').forEach(ch=>ch.onchange=e=>{const n=Number(e.target.dataset.day);t.days=e.target.checked?[...new Set([...t.days,n])]:t.days.filter(x=>x!==n);save();renderHistory()});box.querySelector('[data-opt]').onchange=e=>{t.optional=e.target.checked;save();renderHistory()};wrap.appendChild(box)})}
+function switchTab(name){document.querySelectorAll('.tab').forEach(b=>b.classList.toggle('active',b.dataset.tab===name));document.querySelectorAll('.view').forEach(v=>v.classList.toggle('active',v.id===`view-${name}`));if(name==='calendar')renderCalendar();if(name==='history')renderHistory();if(name==='dex')renderDex();if(name==='settings')renderSettings()}
+document.querySelectorAll('.tab').forEach(b=>b.onclick=()=>switchTab(b.dataset.tab));
+document.getElementById('prevDay').onclick=()=>{const d=new Date(selectedDate);d.setDate(d.getDate()-1);if(d>=START){selectedDate=d;calCursor=new Date(d.getFullYear(),d.getMonth(),1);render()}};document.getElementById('nextDay').onclick=()=>{const d=new Date(selectedDate);d.setDate(d.getDate()+1);selectedDate=d;calCursor=new Date(d.getFullYear(),d.getMonth(),1);render()};document.getElementById('todayBtn').onclick=()=>{selectedDate=maxDate(new Date(),START);calCursor=new Date(selectedDate.getFullYear(),selectedDate.getMonth(),1);render()};document.getElementById('prevMonth').onclick=()=>{const n=new Date(calCursor.getFullYear(),calCursor.getMonth()-1,1);if(n>=new Date(START.getFullYear(),START.getMonth(),1)){calCursor=n;renderCalendar()}};document.getElementById('nextMonth').onclick=()=>{calCursor=new Date(calCursor.getFullYear(),calCursor.getMonth()+1,1);renderCalendar()};document.getElementById('histPrevMonth').onclick=()=>{const n=new Date(histCursor.getFullYear(),histCursor.getMonth()-1,1);if(n>=new Date(START.getFullYear(),START.getMonth(),1)){histCursor=n;renderHistory()}};document.getElementById('histNextMonth').onclick=()=>{histCursor=new Date(histCursor.getFullYear(),histCursor.getMonth()+1,1);renderHistory()};document.getElementById('captureBtn').onclick=capture;document.getElementById('closeCapture').onclick=()=>document.getElementById('captureModal').classList.remove('open');document.getElementById('addCategory').onclick=()=>{const id='c'+Date.now();state.categories.push({id,name:'새 트레이닝 영역',icon:'⭐',tasks:[]});editingCatId=id;save();render()};
+let sx=0;document.getElementById('questGrid').addEventListener('touchstart',e=>sx=e.touches[0].clientX,{passive:true});document.getElementById('questGrid').addEventListener('touchend',e=>{const dx=e.changedTouches[0].clientX-sx;if(Math.abs(dx)>80)(dx>0?document.getElementById('prevDay'):document.getElementById('nextDay')).click()},{passive:true});
+setInterval(()=>{renderHeader()},60000);render();
+</script>
+
+<script id="gaon-mission-icon-js">
+window.GAON_MISSION_ICONS = {
+  "책가방 정리":"🎒",
+  "학원 가방 정리":"👜",
+  "핸드폰 충전하기":"🔋",
+  "물 2잔 마시기":"💧",
+  "세수하고 로션바르기":"🧴",
+  "영양제 먹기":"💊",
+  "영어학원 숙제":"📝",
+  "영어책 읽기":"📚",
+  "영어책 읽기(5권)":"📚",
+  "멀티플리딩스킬 풀기":"📘",
+  "멀티플 리딩 스킬 풀기":"📘",
+  "문법 공부":"✏️",
+  "단어 공부":"🔤",
+  "원리셈":"🧮",
+  "디딤돌":"📐",
+  "팩토":"🧩",
+  "하루 한장 한자":"🈶",
+  "받아쓰기 2회 연습하기":"✍️",
+  "받아쓰기 결과 확인받기":"✅",
+  "스트레칭하기":"🤸",
+  "줄넘기하기":"🪢",
+  "피아노 연습":"🎹"
+};
+window.gaonMissionIcon = function(name){
+  if(!name) return "⭐";
+  const exact = GAON_MISSION_ICONS[name];
+  if(exact) return exact;
+  if(name.includes("가방")) return "🎒";
+  if(name.includes("충전")) return "🔋";
+  if(name.includes("물")) return "💧";
+  if(name.includes("세수") || name.includes("로션")) return "🧴";
+  if(name.includes("영양제")) return "💊";
+  if(name.includes("영어책") || name.includes("읽기")) return "📚";
+  if(name.includes("숙제")) return "📝";
+  if(name.includes("문법")) return "✏️";
+  if(name.includes("단어")) return "🔤";
+  if(name.includes("받아쓰기")) return "✍️";
+  if(name.includes("한자")) return "🈶";
+  if(name.includes("원리셈")) return "🧮";
+  if(name.includes("디딤돌")) return "📐";
+  if(name.includes("팩토")) return "🧩";
+  if(name.includes("스트레칭")) return "🤸";
+  if(name.includes("줄넘기")) return "🪢";
+  if(name.includes("피아노")) return "🎹";
+  return "⭐";
+};
+</script>
+<script id="gaon-mission-migration-js">
+(function(){
+  function ensureNewMissions(){
+    try{
+      if(typeof state==="undefined" || !Array.isArray(state.categories)) return false;
+      const findCat=(words)=>state.categories.find(c=>words.some(w=>(c.name||"").includes(w)));
+      const base=findCat(["베이스캠프","습관"]);
+      const korean=findCat(["한글","한자"]);
+      let changed=false;
+      const add=(cat,task)=>{
+        if(!cat) return;
+        cat.tasks = cat.tasks || [];
+        if(!cat.tasks.some(t=>t.name===task.name)){cat.tasks.push(task);changed=true;}
+      };
+      add(base,{id:"base-wash-lotion",name:"세수하고 로션바르기",days:[0,1,2,3,4,5,6],optional:false});
+      add(base,{id:"base-vitamin",name:"영양제 먹기",days:[0,1,2,3,4,5,6],optional:false});
+      add(korean,{id:"korean-dictation-practice",name:"받아쓰기 2회 연습하기",days:[0],optional:false});
+      add(korean,{id:"korean-dictation-check",name:"받아쓰기 결과 확인받기",days:[4],optional:false});
+      if(changed && typeof save==="function") save();
+      return changed;
+    }catch(e){ return false; }
+  }
+  document.addEventListener("DOMContentLoaded",()=>{
+    if(ensureNewMissions() && typeof render==="function") render();
+  });
+})();
+</script>
+<script id="gaon-reference-dashboard-js">
+function renderHeroDate(){
+  const el=document.getElementById('heroDateText');
+  if(!el) return;
+  const d=selectedDate;
+  const w=['일','월','화','수','목','금','토'][d.getDay()];
+  el.textContent=`${d.getFullYear()}년 ${d.getMonth()+1}월 ${d.getDate()}일 (${w})`;
+}
+let miniCursor = new Date(selectedDate.getFullYear(), selectedDate.getMonth(), 1);
+function renderMiniCalendar(){
+  const title=document.getElementById('miniMonthTitle'), wrap=document.getElementById('miniCalendarDays');
+  if(!title||!wrap) return;
+  title.textContent=`${miniCursor.getMonth()+1}월 ${miniCursor.getFullYear()}`;
+  wrap.innerHTML='';
+  const y=miniCursor.getFullYear(),m=miniCursor.getMonth();
+  const first=new Date(y,m,1).getDay(), last=new Date(y,m+1,0).getDate();
+  for(let i=0;i<first;i++){const e=document.createElement('div');e.className='mini-day empty';wrap.appendChild(e)}
+  for(let n=1;n<=last;n++){
+    const d=new Date(y,m,n), count=dayDoneCount(d), el=document.createElement('div');
+    el.className='mini-day'+(sameDay(d,new Date())?' today':'')+(sameDay(d,selectedDate)?' selected':'')+(d<START?' before':'');
+    el.innerHTML=`<b>${n}</b>${count?`<div class="mini-ball-wrap"><span class="mini-pokeball"></span><span class="mini-ball-num">${count}</span></div>`:''}`;
+    if(d>=START) el.onclick=()=>{selectedDate=d;miniCursor=new Date(y,m,1);calCursor=new Date(y,m,1);render()};
+    wrap.appendChild(el);
+  }
+}
+function renderHomeCapture(){
+  const avail=availableBalls(), progress=Math.min(100,(avail%getCaptureGoal())/getCaptureGoal()*100);
+  const fill=document.getElementById('homeCaptureProgress'), txt=document.getElementById('homeCaptureText');
+  if(fill) fill.style.width=(avail>=50?100:progress)+'%';
+  if(txt) txt.textContent=`${Math.min(avail,getCaptureGoal())} / 50`;
+}
+const originalRender = render;
+render = function(){
+  originalRender();
+  renderHeroDate();
+  renderMiniCalendar();
+  renderHomeCapture();
+}
+document.getElementById('settingsShortcut')?.addEventListener('click',()=>switchTab('settings'));
+document.getElementById('miniPrevMonth')?.addEventListener('click',()=>{miniCursor=new Date(miniCursor.getFullYear(),miniCursor.getMonth()-1,1);if(miniCursor<new Date(START.getFullYear(),START.getMonth(),1))miniCursor=new Date(START.getFullYear(),START.getMonth(),1);renderMiniCalendar()});
+document.getElementById('miniNextMonth')?.addEventListener('click',()=>{miniCursor=new Date(miniCursor.getFullYear(),miniCursor.getMonth()+1,1);renderMiniCalendar()});
+render();
+</script>
+
+
+<script id="gaon-preview-guard">
+window.addEventListener("error", function(e){
+  console.error("Gaon trainer app error:", e.error || e.message);
+});
+</script>
+
+
+<script id="gaon-capture-goal-js">
+(function(){
+  const DEFAULT_CAPTURE_GOAL = 50;
+
+  window.getCaptureGoal = function(){
+    try{
+      const v = Number(state && state.captureGoal);
+      return Number.isFinite(v) && v >= 1 ? Math.floor(v) : DEFAULT_CAPTURE_GOAL;
+    }catch(e){
+      return DEFAULT_CAPTURE_GOAL;
+    }
+  };
+
+  function ensureCaptureGoal(){
+    try{
+      if(typeof state === "undefined") return;
+      if(!Number.isFinite(Number(state.captureGoal)) || Number(state.captureGoal) < 1){
+        state.captureGoal = DEFAULT_CAPTURE_GOAL;
+        if(typeof save === "function") save();
+      }
+    }catch(e){}
+  }
+
+  function patchGoalUI(){
+    const goal = getCaptureGoal();
+    const input = document.getElementById("captureGoalInput");
+    if(input && document.activeElement !== input) input.value = goal;
+
+    const btn = document.getElementById("saveCaptureGoalBtn");
+    if(btn && !btn.dataset.bound){
+      btn.dataset.bound = "1";
+      btn.addEventListener("click", ()=>{
+        const raw = Number(document.getElementById("captureGoalInput")?.value);
+        const next = Math.max(1, Math.min(999, Math.floor(raw || goal)));
+        state.captureGoal = next;
+        if(typeof save === "function") save();
+        if(typeof render === "function") render();
+      });
+    }
+
+    if(input && !input.dataset.bound){
+      input.dataset.bound = "1";
+      input.addEventListener("keydown", e=>{
+        if(e.key === "Enter") document.getElementById("saveCaptureGoalBtn")?.click();
+      });
+    }
+  }
+
+  // Replace UI text and progress after every render.
+  function refreshCaptureGoalUI(){
+    const goal = getCaptureGoal();
+    const avail = typeof availableBalls === "function" ? availableBalls() : 0;
+
+    const txt = document.getElementById("homeCaptureText");
+    if(txt) txt.textContent = `${Math.min(avail, goal)} / ${goal}`;
+
+    const fill = document.getElementById("homeCaptureProgress");
+    if(fill){
+      const pct = Math.min(100, (avail / goal) * 100);
+      fill.style.width = pct + "%";
+    }
+
+    const p = document.querySelector(".capture-side-card p");
+    if(p) p.textContent = `몬스터볼을 ${goal}개 모으면 새로운 포켓몬을 만날 수 있어요!`;
+
+    const btn = document.getElementById("captureBtn");
+    if(btn){
+      btn.disabled = avail < goal;
+      btn.textContent = avail >= goal ? "포켓몬 만나러 가기!" : `포획까지 ${goal - avail}개`;
+    }
+  }
+
+  ensureCaptureGoal();
+
+  const _render = window.render;
+  if(typeof _render === "function"){
+    window.render = function(){
+      const result = _render.apply(this, arguments);
+      ensureCaptureGoal();
+      patchGoalUI();
+      refreshCaptureGoalUI();
+      return result;
+    };
+  }
+
+  document.addEventListener("DOMContentLoaded", ()=>{
+    ensureCaptureGoal();
+    patchGoalUI();
+    refreshCaptureGoalUI();
+  });
+})();
+</script>
+
+</body>
+</html>
